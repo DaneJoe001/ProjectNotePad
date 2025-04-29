@@ -1,4 +1,3 @@
-#include <iostream>
 #include <QApplication>
 #include <QDebug>
 
@@ -6,8 +5,8 @@
 
 int main(int argc, const char* argv[])
 {
-    qDebug() << "Hello World!";
     QApplication app(argc, const_cast<char**>(argv));
     WindowMain window;
+    window.show();
     return app.exec();
 }
