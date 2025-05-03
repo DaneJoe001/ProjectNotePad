@@ -9,31 +9,47 @@ class ManageFile
 {
 public:
     /**
-     * @brief Get the instance object
-     * @return ManageFile&
+     * @brief 获取文件管理器实例
      */
     static ManageFile& get_instance();
     /**
-     * @brief open file
-     * @return true
-     * @return false
+     * @brief 打开文件
+     * @return true 打开成功 false 打开失败
      */
-    bool open();
+    bool open(QString path);
     /**
-     * @brief close file
-     * @param path
+     * @brief 新建文件
+     * @return QString
      */
-    void close(QString path);
+    bool new_file(QString path);
     /**
-     * @brief get current file content
-     * @return QString&
+     * @brief 保存文件
+     * @param path 文件路径名
+     * @param content 文件内容
+     * @return true 保存成功
+     * @return false 保存失败
+     */
+    bool save(const QString& path, const QString& content);
+    /**
+     * @brief 在m_file_map中删除文件
+     * @param path 文件路径
+     */
+    bool close(QString path);
+    /**
+     * @brief 获取当前文件内容
+     * @return 当前文件内容引用
      */
     QString& get_current_file_content();
     /**
-     * @brief Get the current file path object
-     * @return QString&
+     * @brief 获取当前文件路径
+     * @return 当前文件路径引用
      */
     QString& get_current_file_path();
+    /**
+     * @brief 获取文件内容
+     * @note 当文件不在列表中中则打开当前文件内容
+     */
+    QString& get_file_content(QString path);
 private:
     ManageFile();
     ~ManageFile() = default;
@@ -41,18 +57,13 @@ private:
     ManageFile(const ManageFile&&) = delete;
     ManageFile& operator=(ManageFile&) = delete;
     ManageFile&& operator=(ManageFile&&) = delete;
-    /**
-     * @brief 向文件列表中添加文件信息
-     * @param path 文件路径
-     * @param content 文件内容
-     */
-    void add_new_file(QString& path, QString& content);
 
 
 private:
-    //path+content
-    QString m_current_file_content;
-    QString m_current_file_path;
-    //考虑是否换种数据结构存储？
+    //当前文件内容
+    QString m_current_file_content = nullptr;
+    //当前文件路径
+    QString m_current_file_path = nullptr;
+    //存储文件路径+内容
     QMap<QString, QString> m_file_map;
 };
