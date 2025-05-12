@@ -14,6 +14,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(RESOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resource")
+
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 file(GLOB_RECURSE SOURCES "source/*.cpp" "include/*.hpp" "include/*.h")
 
@@ -21,6 +23,8 @@ add_executable(note_pad ${SOURCES})
 
 target_link_libraries(note_pad PRIVATE Qt6::Core Qt6::Widgets)
 target_include_directories(note_pad PRIVATE include)
+
+target_compile_definitions(note_pad PRIVATE RESOURCE_DIR="${RESOURCE_DIR}")
 
 #设置qDebug在终端输出
 set_target_properties(note_pad PROPERTIES

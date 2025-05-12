@@ -23,13 +23,14 @@ QString& ManageFile::get_current_file_path()
 
 bool ManageFile::open(QString path)
 {
-    //TODO:先在map中进行查找,查找不到再打开
     if (path.isEmpty())
     {
         return false;
     }
     if (m_file_map.find(path) != m_file_map.end())
     {
+        m_current_file_path = path;
+        m_current_file_content = m_file_map[path];
         qDebug() << "文件已打开！" << path;
         //TODO：在界面中提示
         return false;
@@ -114,4 +115,9 @@ bool ManageFile::new_file(QString path)
     m_file_map[m_current_file_path] = m_current_file_content;
     //保存当前文件内容
     return true;
+}
+
+QStringList ManageFile::get_file_path_list()
+{
+    return QStringList();
 }

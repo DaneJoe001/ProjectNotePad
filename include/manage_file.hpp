@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QString>
+#include <QStringList>
 #include <QMap>
 
 //TODO:考虑使用一种更合理的方式管理文件列表
@@ -50,6 +51,11 @@ public:
      * @note 当文件不在列表中中则打开当前文件内容
      */
     QString& get_file_content(QString path);
+    /**
+     * @brief 获取文件路径列表
+     * @return 文件路径列表
+     */
+    QStringList get_file_path_list();
 private:
     ManageFile();
     ~ManageFile() = default;
